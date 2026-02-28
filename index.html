@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title> StageVLA </title>
+
+    <link rel="icon" href="./static/images/logo.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/leaderboard.css">
+    <link rel="stylesheet" href="./static/css/video-player.css">
+
+    <script type="text/javascript" src="./static/js/sort-table.js" defer></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/explorer-index.js"></script>
+    <script src="./static/js/question_card.js"></script>
+
+    <script src="./static/js/leaderboard_testmini.js"></script>
+    <script src="./data/results/output_folders.js" defer></script>
+    <script src="./data/results/model_scores.js" defer></script>
+
+    <script src="./visualizer/data/data_public.js" defer></script>
+
+    <style>
+        .no-sort {
+            cursor: default;
+            pointer-events: none;
+            background-image: none !important;
+            /* Remove the sort arrow */
+        }
+
+        .title-stagevla {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 2px;
+            margin-bottom: 0.5em;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            padding-bottom: 0.2em;
+        }
+
+        .title-stagevla::after {
+            content: '';
+            position: absolute;
+            bottom: -22px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            border-radius: 2px;
+        }
+
+        .title-stagevla img {
+            width: 1.5em;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
+                    <a class="navbar-link">
+                        More Research
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="https://gr1-manipulation.github.io/">
+                            <b>GR-1</b>
+                        </a>
+                        <a class="navbar-item" href="https://gr-mg.github.io/">
+                            <b>GR-MG</b>
+                        </a>
+                        <a class="navbar-item" href="https://gr2-manipulation.github.io/">
+                            <b>GR-2</b>
+                        </a>
+                        <a class="navbar-item" href="https://robovlms.github.io/">
+                            <b>RoboVLMs</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title is-bold">
+                            <img src="./static/images/logo.png" style="width:2.5em;vertical-align: middle" alt="Logo" />
+                            <span class="stagevla"
+                                style="vertical-align: middle;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)">StageVLA</span>
+                        </h1>
+                        <h2 class="subtitle is-3 publication-subtitle " , style="width: 100%;margin-bottom: 20px;">
+                            <strong>A Perception-Driven Hierarchical State Machine for Few-Shot Long-Horizon Robotic
+                                Manipulation</strong>
+                        </h2>
+                        <!-- <h3 class="subtitle is-4 publication-subtitle" style="font-weight: bold; margin-bottom: 10px;">
+                            NeurIPS 2025
+                        </h3>
+                        <h3 class="subtitle is-4 publication-subtitle" style="font-weight: bold; margin-bottom: 20px;">
+                            🏆 COLOSSEUM Challenge Champion @ CVPR 2025 GRAIL Workshop
+                        </h3> -->
+
+
+                        <!-- <div class="is-size-5 publication-authors" , style="width: 100%; margin: 15px auto;" ,>
+                            <span class="author-block"><a href="https://github.com/LPY1219" target="_blank"
+                                    style="color: black;">Peiyan
+                                    Li</a>,<sup>1</sup><sup>,</sup><sup>2</sup><sup>,</sup><sup>3</sup><sup>,</sup><sup>†</sup></span>
+                            <span class="author-block"><a href="https://github.com/YixiangChen515" target="_blank"
+                                    style="color: black;">Yixiang Chen</a>,<sup>1</sup><sup>,</sup><sup>3</sup></span>
+                            <span class="author-block"><a
+                                    href="https://scholar.google.com/citations?user=7u0TYgIAAAAJ&hl=zh-CN&oi=ao"
+                                    target="_blank" style="color: black;">Hongtao
+                                    Wu</a>,<sup>2</sup><sup>,</sup><sup>†</sup><sup>,</sup><sup>*</sup></span>
+                            <span class="author-block"><a href="https://yusufma03.github.io/" target="_blank"
+                                    style="color: black;">Xiao Ma</a>,<sup>2</sup><sup>,</sup><sup>†</sup></span>
+                            <span class="author-block"><a href="https://stagevla.github.io/" target="_blank"
+                                    style="color: black;">Xiangnan Wu</a>,<sup>1</sup></span>
+                            <br>
+                            <span class="author-block"><a href="https://yanrockhuang.github.io/" target="_blank"
+                                    style="color: black;">Yan
+                                    Huang</a>,<sup>1</sup><sup>,</sup><sup>3</sup><sup>,</sup><sup>4</sup></span>
+                            <span class="author-block"><a
+                                    href="https://scholar.google.com/citations?hl=zh-CN&user=8kzzUboAAAAJ&view_op=list_works&sortby=pubdate"
+                                    target="_blank" style="color: black;">Liang
+                                    Wang</a>,<sup>1</sup><sup>,</sup><sup>3</sup></span>
+                            <span class="author-block"><a href="https://www.taokong.org/" target="_blank"
+                                    style="color: black;">Tao Kong</a>,<sup>2</sup></span>
+                            <span class="author-block"><a
+                                    href="https://scholar.google.com/citations?hl=en&user=W-FGd_UAAAAJ&view_op=list_works&sortby=pubdate"
+                                    target="_blank" style="color: black;">Tieniu
+                                    Tan</a>,<sup>1</sup><sup>,</sup><sup>3</sup><sup>,</sup><sup>5</sup><sup>,</sup><sup>*</sup></span>
+                        </div> -->
+
+                        <!-- <div class="is-size-5 publication-authors" , style=" margin: 10px auto;" ,>
+                            <span class="author-block"><sup>†</sup>Project Lead,</span>
+                            <span class="author-block"><sup>*</sup>Corresponding Author</span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>CASIA,</span>
+                            <span class="author-block"><sup>2</sup>Bytedance Seed,</span>
+                            <span class="author-block"><sup>3</sup>UCAS,</span>
+                            <span class="author-block"><sup>4</sup>FiveAges,</span>
+                            <span class="author-block"><sup>5</sup>NJU</span>
+                        </div> -->
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2506.07961"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv" style="color: #B31B1B;"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/BridgeVLA/BridgeVLA"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <!-- Dataset Link. -->
+                                <span class="link-block">
+                                    <a href="https://huggingface.co/datasets/LPY/BridgeVLA/tree/main"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <!-- <i class="far fa-huggingface"></i> -->
+                                            <p style="font-size:18px">🤗</p>
+                                        </span>
+                                        <span>Dataset</span>
+                                    </a>
+                                </span>
+                                <!-- Checkpoint Link. -->
+                                <span class="link-block">
+                                    <a href="https://huggingface.co/datasets/LPY/BridgeVLA/tree/main/checkpoints"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <p style="font-size:18px"><i class="fas fa-robot"
+                                                    style="color: #2196F3;"></i></p>
+                                        </span>
+                                        <span>Checkpoints</span>
+                                    </a>
+                                </span>
+                                <!-- X (Twitter) Link. -->
+                                <span class="link-block">
+                                    <a href="https://x.com/PYL78055244/status/1934635507365163393"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <span style="font-size: 18px; font-weight: bold; color: #FFFFFF;">𝕏</span>
+                                        </span>
+                                        <span>X</span>
+                                    </a>
+                                </span>
+                                <!-- Talk Link. -->
+                                <span class="link-block">
+                                    <a href="https://www.bilibili.com/video/BV1pt81zdEe7/?spm_id_from=333.337.search-card.all.click&vd_source=cfe83a7cac71209ab43d99b965fed771"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <span style="font-size: 18px; color: #FB7299;">📺</span>
+                                        </span>
+                                        <span>Talk</span>
+                                    </a>
+                                </span>
+                                <!-- 机器之心 Link. -->
+                                <span class="link-block">
+                                    <a href="https://mp.weixin.qq.com/s/rNBNqgj5UMvVvwPjWr_Gew"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <img src="./static/images/jiqizhixin.png" style="width: 18px; height: 18px;"
+                                                alt="机器之心" />
+                                        </span>
+                                        <span>机器之心</span>
+                                    </a>
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- TLDR Section -->
+    <section class="section" style="padding-top: 1rem; padding-bottom: 1rem;">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <div class="tldr-box" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+                                    border-left: 5px solid #4a90e2; 
+                                    padding: 20px; 
+                                    border-radius: 8px; 
+                                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        <h2 class="title is-4" style="color: #2c3e50; margin-bottom: 10px;">TL;DR:</h2>
+                        <p class="is-size-5" style="color: #34495e; line-height: 1.6;">
+                            We propose StageVLA, a perception-driven hierarchical framework that integrates object
+                            states, subtasks, and atomic skills with unified Semantic Approaching Vector Generator
+                            (SAVG) and End-Effector representation (UEER), enabling robust few-shot, cross-embodiment,
+                            and spatial-background generalization in long-horizon robotic manipulation tasks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <div style="display: flex; justify-content: center; margin: 40px 0;">
+        <div style="width: 80%; max-width: 900px;">
+            <div
+                style="box-shadow: 0 4px 16px rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; background: #fff;">
+                <iframe width="100%" height="506" src="./static/videos/StageVLA.mp4"
+                    title="BridgeVLA Demo Video" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="margin-bottom: 2vh;">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        General-purpose robotics has gained increasing attention due to its potential to enable scalable
+                        real-world automation. Recent advances in Vision-Language-Action (VLA) models have endowed
+                        robots with the ability to interpret task intent from natural language, yet existing approaches
+                        remain limited in few-shot generalization across diverse backgrounds and object configurations
+                        in long-horizon manipulation tasks.
+                        In this work, we propose StageVLA, a perception-driven hierarchical state machine (PHSM) that
+                        integrates object states, subtasks, and atomic skills to enable closed-loop decision-making for
+                        long-horizon robotic manipulation. StageVLA decomposes skill execution into approaching and
+                        interaction phases, and introduces a unified Semantic Approaching Vector Generator (SAVG)
+                        together with a Unified End-Effector representation (UEER) to reduce action ambiguity across
+                        different robot embodiments in the approaching phase. All models are trained from a few human
+                        demonstrations, augmented through a point-cloud editing pipeline (StageGen).
+                        StageVLA is deployed through a unified real-robot execution interface (Bestman), enabling robust
+                        few-shot, cross-embodiment, and spatial-background generalization. Experimental results across
+                        multiple environments demonstrate that StageVLA consistently outperforms state-of-the-art
+                        baselines, with ablation studies validating the contribution of each component.
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <div class="content has-text-justified">
+                        <div class="box" style="margin-top: 0; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/overview.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Figure 1: Overview of StageVLA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METHOD SECTION -->
+    <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+            <h1 class="title is-1 mathvista_other">
+                <span class="mathvista_other" style="vertical-align: middle">Method</span>
+            </h1>
+        </div>
+    </section>
+
+
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <div class="content has-text-justified">
+                        <!-- StageGen -->
+                        <hr style="margin-top: 1em;">
+                        <div class="rows is-centered has-text-centered">
+                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>StageGen</i> </h2>
+
+                            <div class="columns is-vcentered  is-centered">
+                                <video id="staggegen_method" autoplay="" muted="" loop="" height="37%" width="37%" style="margin-right: 5px;">
+                                <source src="./static/videos/StageGen/StageGen-MethodExplanation.mp4" type="video/mp4">
+                                </video>
+                                <video id="staggegen_method-examples" autoplay="" muted="" loop="" height="60%" width="60%" style="margin-left: 5px;">
+                                <source src="./static/videos/StageGen/StageGen-FullGenPointCloud.mp4" type="video/mp4">
+                                </video>
+                            </div>
+
+
+                            <p class="content has-text-justified">
+                                <i>StageGen</i> adapts actions in the source demonstration to novel object configurations by incorporating the ideas of Task and Motion Planning (TAMP). 
+                                Specifically, the source trajectory is decomposed into object-centric <strong>motion segments</strong> moving in free space and <strong>skill segments</strong> involving on-object manipulation through contact.
+                                During generation, the skill segments are transformed as a whole, and the motion segments are replanned via motion planning. 
+                                The corresponding visual observations are synthesized by choosing 3D point clouds as the modality and rearranging the objects and robot end-effectors in the scene via 3D editing.
+                            </p>
+
+
+                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/stagegen.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 2: Network architecture of BridgeVLA</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PSHM -->
+                        <hr style="margin-top: 1em;">
+                        <div class="rows is-centered has-text-centered">
+                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Perception-Driven Hierarcical State Machine</i> </h2>
+                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/phsm.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 2: Network architecture of BridgeVLA</p>
+                                </div>
+                            </div>
+                            <p class="content has-text-justified">
+                                <i>StageGen</i> adapts actions in the source demonstration to novel object configurations by incorporating the ideas of Task and Motion Planning (TAMP). 
+                                Specifically, the source trajectory is decomposed into object-centric <strong>motion segments</strong> moving in free space and <strong>skill segments</strong> involving on-object manipulation through contact.
+                                During generation, the skill segments are transformed as a whole, and the motion segments are replanned via motion planning. 
+                                The corresponding visual observations are synthesized by choosing 3D point clouds as the modality and rearranging the objects and robot end-effectors in the scene via 3D editing.
+                            </p>
+                        </div>
+
+
+
+                        <!-- SAVG -->
+                        <hr style="margin-top: 1em;">
+                        <div class="rows is-centered has-text-centered">
+                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Semantic Approching Vector Generator</i> </h2>
+                             <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/savg.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 2: Network architecture of BridgeVLA</p>
+                                </div>
+                            </div>
+                            <p class="content has-text-justified">
+                                <i>StageGen</i> adapts actions in the source demonstration to novel object configurations by incorporating the ideas of Task and Motion Planning (TAMP). 
+                                Specifically, the source trajectory is decomposed into object-centric <strong>motion segments</strong> moving in free space and <strong>skill segments</strong> involving on-object manipulation through contact.
+                                During generation, the skill segments are transformed as a whole, and the motion segments are replanned via motion planning. 
+                                The corresponding visual observations are synthesized by choosing 3D point clouds as the modality and rearranging the objects and robot end-effectors in the scene via 3D editing.
+                            </p>
+                        </div>
+                        <hr style="margin-top: 1em;">
+
+                        <p>As illustrated in Fig. 2, BridgeVLA employs a dual-phase training recipe.</p>
+
+                        <h4 class="title is-5 mt-5 mb-3">2D Heatmap Pre-training</h4>
+                        <p>
+                            We train BridgeVLA on 2D object detection datasets. The model takes as input an image and
+                            language describing the target object and outputs a 2D heatmap which highlights regions of
+                            interest that correspond to the target object.
+                        </p>
+
+                        <h4 class="title is-5 mt-5 mb-3">3D Action Fine-tuning</h4>
+                        <p>
+                            The model takes as input three orthographic projection images of a 3D point cloud and a
+                            language instruction. It outputs three 2D heatmaps, which highlight the position of the
+                            end-effector in the next keyframe across all three views. For the remaining action
+                            components, it uses an MLP to aggregate the image feature tokens to predict the rotation
+                            action, gripper action, and collision flag of the next keyframe.
+                        </p>
+
+                        <div class="box" style="margin-top: 2rem; margin-bottom: 2rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/network.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Figure 2: Network architecture of BridgeVLA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiments-->
+    <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+            <h1 class="title is-1 mathvista_other">Experiments</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <div class="content">
+                        <!-- Simulation Experiments -->
+                        <h2 class="title is-3 has-text-centered">Simulation Experiments</h2>
+
+                        <p class="has-text-justified">
+                            To test our model's ability to deal with complex manipulation tasks, we evaluate BridgeVLA
+                            on RLBench, a benchmark implemented in CoppeliaSim using a Franka Panda robot mounted
+                            with a parallel-jaw gripper. Totally, we choose 18 tasks from RLBench, and each task is
+                            provided with 100 expert demonstrations.
+                            And each demonstration is paired with language instruction and multiple keyframes. Models
+                            are evaluated via binary success rates over 25 trials per task,
+                            with a maximum of 25 action steps per trial. The results are shown in Tab. 1.
+                        </p>
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/SimPolicyEval.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: Results on RLBench.</p>
+                            </div>
+                        </div>
+
+                        <!-- RLBench Videos -->
+                        <h3 class="title is-4 has-text-centered">Task & Source Demonstrations</h3>
+
+                        <!-- Row 1 -->
+                        <div class="columns is-multiline">
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/Sim-CubeStacking.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">Sim-CubeStacking</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/place_mug_on_blue_cube.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">MugStacking</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/place_mug_into_microwave.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">PutMugMicrowave</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="columns is-multiline">
+
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/CloseLaptopLid.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">CloseLaptopLid</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/PutMoneySafe.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">PutMoneySafe</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/PushButton.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">PushButton</p>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                    
+
+
+                       
+
+                        <!-- Real-World Experiments -->
+                        <h2 class="title is-3 has-text-centered">Real-World Experiments</h2>
+
+                        <p class="has-text-justified">
+                            We conduct real-robot experiments to further verify our model's performance. A total of 13
+                            manipulation tasks are evaluated, covering a spectrum from simple pick-and-place to
+                            long-horizon behaviors such as opening a drawer and placing objects inside.
+                        </p>
+
+
+
+                        <!-- RLBench Videos -->
+                        <h3 class="title is-4 has-text-centered">Task & Source Demonstrations</h3>
+
+                        <!-- Row 1 -->
+                        <div class="columns is-multiline">
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/red_gripper_real_task_simple.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">BoxStacking</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/CubeStacking.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">CubeStacking</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/TrashSweep.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">TrashSweep</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="columns is-multiline">
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/MugRack.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">MugRack</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/TightenContainer.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">TightenContainer</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/Experiments/PutStationeryBox.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">PutStationeryBox</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/TaskDescription.Png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: Results on RLBench.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="title is-5 mt-5 mb-3">Results</h4>
+                        <p class="has-text-justified">
+                            In addition to the full model, we compare against RVT-2, the strongest simulation baseline,
+                            and an ablated variant of BridgeVLA without our proposed 2D-heatmap pretraining.
+                            The results are shown in Fig. 4.
+                            BridgeVLA outperforms both baselines in six of the seven settings, and maintains high
+                            robustness under visual disturbances (Distractor, Background).
+                        </p>
+
+                        <p class="has-text-justified">
+                            Furthermore, it achieves a 96.8% success rate in the Basic setting even with only 3 training
+                            trajectories per task, showing remarkable data efficiency. The results also validate the
+                            effectiveness of our 2D-heatmap pretraining in connecting language and vision for
+                            compositional task generalization.
+                        </p>
+
+
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/RealWorldGenralizationSetting.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <img src="./static/images/RealGeneralizationResults.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Figure 4: Real-robot setup and results.</p>
+                            </div>
+                        </div>
+  
+
+
+                        <h2 class="title is-3 has-text-centered">Ablation Study</h2>
+                        <p class="has-text-justified">
+                            In addition to the full model, we compare against RVT-2, the strongest simulation baseline,
+                            and an ablated variant of BridgeVLA without our proposed 2D-heatmap pretraining.
+                            The results are shown in Fig. 4.
+                            BridgeVLA outperforms both baselines in six of the seven settings, and maintains high
+                            robustness under visual disturbances (Distractor, Background).
+                        </p>
+
+                        <!-- StageGen -->
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/StageGen-Ablation.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: StageGen Ablation Based on SAVG & DP3-MSGF</p>
+                            </div>
+                        </div>
+
+
+
+
+
+                        
+                        <!-- SAVG -->
+                        <!-- 1. 添加 columns 容器 -->
+                        <div class="columns is-centered" style="margin-top: 1rem;">
+                            
+                            <!-- 2. 第一个图放在 column 中 (is-half 表示占一半宽度) -->
+                            <div class="column is-half">
+                                <div class="box">
+                                    <div class="content has-text-centered">
+                                        <img src="./static/images/SAVG-LossFunctionAblation.png" alt="Loss Function Ablation" width="100%" style="height: auto;" />
+                                        <p><strong>Figure 1:</strong> SAVG Loss Function Ablation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- DP3-MSGF -->
+                            <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/DP3-MSGF-Ablation.png" alt="grade-lv" width="90%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Table 1: StageGen Ablation Based on SAVG & DP3-MF</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                                                <!-- StageGen -->
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/SAVG-FusionModelAblation.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: SAVG Fusion Model Ablation</p>
+                            </div>
+                        </div>
+
+
+
+
+                       
+
+                        <h2 class="title is-3 has-text-centered">Failure Cases</h2>
+                        <p class="has-text-justified">
+                            Although our method outperforms baseline methods in the Category setting, its absolute
+                            success rate is not high.
+                            We show some failure cases below.
+
+                        <div class="columns is-multiline">
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/real_reduce_size/failure/category_place_the_bread_in_the_green_plate_4_52_caption.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">Place bread in green plate</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/real_reduce_size/failure/category_put_the_apple_in_the_top_shelf_2_54_caption.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">Put apple on top shelf</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source
+                                            src="./static/videos/real_reduce_size/failure/category_put_the_peach_in_the_bottom_shelf_5_22_caption.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">Put peach on bottom shelf</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        We believe this relatively low performance is not due to BridgeVLA forgetting the knowledge
+                        gained from pre-training,
+                        as it still predicts heatmaps accurately when provided with samples from the pre-training
+                        dataset after fine-tuning (see Fig.5).
+                        Instead, we hypothesize that the reduced performance stems from two factors:
+                        1) The images in the pre-training dataset are captured from third-person views, which differ
+                        significantly from the projection images in our robot data;
+                        2) The pre-training task focuses solely on object localization, whereas manipulation involves
+                        predicting keypoints that do not correspond to an object.
+                        Exploring how to fully utilise such preserved pre-training knowledge for manipulation is an
+                        interesting direction for future research.
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    </section>
+    <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+            <h1 class="title is-1 mathvista_other" id="citation">Citation</h1>
+        </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <div class="content">
+                        <pre><code>
+@misc{li2025bridgevla,
+    title={BridgeVLA: Input-Output Alignment for Efficient 3D Manipulation Learning with Vision-Language Models},
+    author={Peiyan Li and Yixiang Chen and Hongtao Wu and Xiao Ma and Xiangnan Wu and Yan Huang and Liang Wang and Tao Kong and Tieniu Tan},
+    year={2025},
+    eprint={2506.07961},
+    archivePrefix={arXiv},
+    primaryClass={cs.RO}
+}
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container" style="width: 60%;">
+            <style>
+                pre {
+                    background-color: #f4f4f4;
+                    padding: 5px;
+                    /* Adjust padding to 5px */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow-x: auto;
+                    /* Allow horizontal scrolling */
+                }
+
+                code {
+                    font-family: Consolas, "Courier New", monospace;
+                    color: #d63384;
+                    /* Code text color */
+                }
+            </style>
+
+
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <!-- <div class="container"> -->
+        <div class="content has-text-centered">
+        </div>
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p style="text-align: center;">
+                        This website is adapted from <a href="https://mm-rlhf.github.io/">MM-RLHF</a> and <a
+                            href="https://video-mme.github.io/">Video-MME</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+    </footer>
+
+</body>
+
+</html>
