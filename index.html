@@ -39,6 +39,21 @@
 
     <script src="./visualizer/data/data_public.js" defer></script>
 
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']] // 允许使用 $...$ 表示行内公式
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+
     <style>
         .no-sort {
             cursor: default;
@@ -157,8 +172,7 @@
                             <div class="publication-links">
                                 <!-- PDF Link. -->
                                 <span class="link-block">
-                                    <a href="https://arxiv.org/abs/2506.07961"
-                                        class="external-link button is-normal is-rounded is-dark">
+                                    <a href=" " class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
                                             <i class="ai ai-arxiv" style="color: #B31B1B;"></i>
                                         </span>
@@ -167,8 +181,7 @@
                                 </span>
                                 <!-- Code Link. -->
                                 <span class="link-block">
-                                    <a href="https://github.com/BridgeVLA/BridgeVLA"
-                                        class="external-link button is-normal is-rounded is-dark">
+                                    <a href=" " class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
                                             <i class="fab fa-github"></i>
                                         </span>
@@ -238,9 +251,10 @@
     </section>
 
 
-    <!-- TLDR Section -->
+    <!-- Short Introduciton -->
     <section class="section" style="padding-top: 1rem; padding-bottom: 1rem;">
         <div class="container">
+
             <div class="columns is-centered">
                 <div class="column is-four-fifths">
                     <div class="tldr-box" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
@@ -248,7 +262,6 @@
                                     padding: 20px; 
                                     border-radius: 8px; 
                                     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                        <h2 class="title is-4" style="color: #2c3e50; margin-bottom: 10px;">TL;DR:</h2>
                         <p class="is-size-5" style="color: #34495e; line-height: 1.6;">
                             We propose StageVLA, a perception-driven hierarchical framework that integrates object
                             states, subtasks, and atomic skills with unified Semantic Approaching Vector Generator
@@ -266,8 +279,8 @@
         <div style="width: 80%; max-width: 900px;">
             <div
                 style="box-shadow: 0 4px 16px rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; background: #fff;">
-                <iframe width="100%" height="506" src="./static/videos/StageVLA.mp4"
-                    title="BridgeVLA Demo Video" frameborder="0"
+                <iframe width="100%" height="507" src="./static/videos/StageVLA.mp4" title="StageVLA Demo Video"
+                    frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen>
                 </iframe>
@@ -276,7 +289,7 @@
     </div>
 
     <section class="section">
-        <div class="container" style="margin-bottom: 2vh;">
+        <div class="container" style="margin-bottom: -4vh;">
             <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
@@ -334,109 +347,179 @@
 
 
 
-
     <section class="section">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-four-fifths">
                     <div class="content has-text-justified">
+                        <!-- PSHM -->
+                        <hr style="margin-top: 1em;">
+                        <div class="rows is-centered has-text-centered">
+
+                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/linyi_pipeline.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 2: StageVLA pipeline</p>
+                                </div>
+                            </div>
+                            <p class="content has-text-justified">
+                                StageVLA consists of three key modules:
+                                <strong>(A) High-Level Task Planning</strong>, where a VLM parses user instructions to
+                                construct a PHSM over object states $\mathcal{S}$ and atomic skills $\mathcal{Z}$,
+                                generating an optimal skill sequence via dynamic programming.
+                                <strong>(B) Data Synthesis & Training</strong>, where the StageGen module generate
+                                synthetic demonstrations via point cloud editing for data-efficient learning.
+                                <strong>(C) Two-Stage Execution</strong>, where the policy decomposes actions into
+                                approaching and interaction phases. SAVG predicts target poses for spatial alignment,
+                                while a DP3-MSF diffusion policy executes contact-rich interactions based on real-time
+                                state judgments from DINOv3 features. This hierarchical design enables robust,
+                                closed-loop long-horizon manipulation.
+                            </p>
+                        </div>
+
+
+                        <!-- PSHM -->
+                        <hr style="margin-top: 1em;">
+                        <div class="rows is-centered has-text-centered">
+                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Perception-Driven
+                                    Hierarcical State Machine</i> </h2>
+                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/phsm.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 3: PHSM execution</p>
+                                </div>
+                            </div>
+                            <p class="content has-text-justified">
+                                Given a long-horizon task instruction, a VLM decomposes the task into subtasks based on
+                                atomic skills $\mathcal{Z}$ while extracting the object states $\mathcal{O}$ to
+                                establish the scene state space $\mathcal{S}$.
+                                A valid state transition matrix $\mathcal{T}$ is constructed under constraints. Finally,
+                                dynamic programming searches for the optimal skill sequence (red arrows) from the
+                                initial state to the goal state.
+                            </p>
+                        </div>
+
                         <!-- StageGen -->
                         <hr style="margin-top: 1em;">
                         <div class="rows is-centered has-text-centered">
                             <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>StageGen</i> </h2>
-
-                            <div class="columns is-vcentered  is-centered">
-                                <video id="staggegen_method" autoplay="" muted="" loop="" height="37%" width="37%" style="margin-right: 5px;">
-                                <source src="./static/videos/StageGen/StageGen-MethodExplanation.mp4" type="video/mp4">
-                                </video>
-                                <video id="staggegen_method-examples" autoplay="" muted="" loop="" height="60%" width="60%" style="margin-left: 5px;">
-                                <source src="./static/videos/StageGen/StageGen-FullGenPointCloud.mp4" type="video/mp4">
-                                </video>
+                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                                <div class="columns is-vcentered  is-centered">
+                                    <video id="staggegen_method" autoplay="" muted="" loop="" height="37%" width="35%"
+                                        style="margin-right: 5px;">
+                                        <source src="./static/videos/StageGen/StageGen-MethodExplanation.mp4"
+                                            type="video/mp4">
+                                    </video>
+                                    <video id="staggegen_method-examples" autoplay="" muted="" loop="" height="60%"
+                                        width="60%" style="margin-left: 5px;">
+                                        <source src="./static/videos/StageGen/StageGen-FullGenPointCloud.mp4"
+                                            type="video/mp4">
+                                    </video>
+                                </div>
                             </div>
 
-
                             <p class="content has-text-justified">
-                                <i>StageGen</i> adapts actions in the source demonstration to novel object configurations by incorporating the ideas of Task and Motion Planning (TAMP). 
-                                Specifically, the source trajectory is decomposed into object-centric <strong>motion segments</strong> moving in free space and <strong>skill segments</strong> involving on-object manipulation through contact.
-                                During generation, the skill segments are transformed as a whole, and the motion segments are replanned via motion planning. 
-                                The corresponding visual observations are synthesized by choosing 3D point clouds as the modality and rearranging the objects and robot end-effectors in the scene via 3D editing.
+                                To enable few-shot generalization, we generate synthetic demonstrations via structured
+                                point cloud editing.
+                                Our method advances <a href="https://demo-generation.github.io/">DemoGen</a> by
+                                incorporating a Unified End-Effector Formulation (UEEF), supporting object rotation,
+                                and enabling multi-granular data generation at demo, skill and grasp-pose levels.
                             </p>
-
 
                             <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
                                 <div class="content has-text-centered">
                                     <img src="./static/images/stagegen.png" alt="grade-lv" width="100%"
                                         style="max-width: 1200px; height: auto;" />
-                                    <p>Figure 2: Network architecture of BridgeVLA</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PSHM -->
-                        <hr style="margin-top: 1em;">
-                        <div class="rows is-centered has-text-centered">
-                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Perception-Driven Hierarcical State Machine</i> </h2>
-                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
-                                <div class="content has-text-centered">
-                                    <img src="./static/images/phsm.png" alt="grade-lv" width="100%"
-                                        style="max-width: 1200px; height: auto;" />
-                                    <p>Figure 2: Network architecture of BridgeVLA</p>
+                                    <p>Figure 4: StageGen pipeline</p>
                                 </div>
                             </div>
                             <p class="content has-text-justified">
-                                <i>StageGen</i> adapts actions in the source demonstration to novel object configurations by incorporating the ideas of Task and Motion Planning (TAMP). 
-                                Specifically, the source trajectory is decomposed into object-centric <strong>motion segments</strong> moving in free space and <strong>skill segments</strong> involving on-object manipulation through contact.
-                                During generation, the skill segments are transformed as a whole, and the motion segments are replanned via motion planning. 
-                                The corresponding visual observations are synthesized by choosing 3D point clouds as the modality and rearranging the objects and robot end-effectors in the scene via 3D editing.
+                                Compared to previous works on data-efficient learning for generalization, StageGen
+                                significantly enhances
+                                the model's capabilities across four key dimensions: spatial layout, background
+                                robustness, embodiment adaptability, and orientation invariance.
                             </p>
+
                         </div>
+
+
 
 
 
                         <!-- SAVG -->
                         <hr style="margin-top: 1em;">
                         <div class="rows is-centered has-text-centered">
-                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Semantic Approching Vector Generator</i> </h2>
-                             <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
+                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Semantic Approching
+                                    Vector Generator</i> </h2>
+                            <div class="box" style="margin-top: 0rem; margin-bottom: 2rem;">
                                 <div class="content has-text-centered">
                                     <img src="./static/images/savg.png" alt="grade-lv" width="100%"
                                         style="max-width: 1200px; height: auto;" />
-                                    <p>Figure 2: Network architecture of BridgeVLA</p>
+                                    <p>Figure 5: Illustration of SAVG</p>
                                 </div>
                             </div>
                             <p class="content has-text-justified">
-                                <i>StageGen</i> adapts actions in the source demonstration to novel object configurations by incorporating the ideas of Task and Motion Planning (TAMP). 
-                                Specifically, the source trajectory is decomposed into object-centric <strong>motion segments</strong> moving in free space and <strong>skill segments</strong> involving on-object manipulation through contact.
-                                During generation, the skill segments are transformed as a whole, and the motion segments are replanned via motion planning. 
-                                The corresponding visual observations are synthesized by choosing 3D point clouds as the modality and rearranging the objects and robot end-effectors in the scene via 3D editing.
+                                SAVG predict the SAV, which is categorized into
+                                object-centric and tool-relative cases.
+                                a) Object-Centric Case: When no tool is used, SAV depends
+                                only on object geometry and gripper configuration and
+                                it can be interpreted as a functional point.
+                                b) Tool-Relative Case: When using tools, the effective
+                                interaction point corresponds to the tool-object contact region,
+                                invariant to the end-effector grasp configuration. Since
+                                tool and end-effector form a rigid body, SAV can be represented
+                                as the transformation of end-effector.
+                                We leverage the strength of incrementally learning,
+                                forcing the model to progressively converge towards the ground truth.
                             </p>
+
+                            <!-- ModelStructure -->
                         </div>
                         <hr style="margin-top: 1em;">
+                        <div class="rows is-centered has-text-centered">
+                            <h2 class="title is-3" style="margin-bottom: 0.5em; color:#7dce9a"><i>Model Structure</i>
+                            </h2>
+                        </div>
 
-                        <p>As illustrated in Fig. 2, BridgeVLA employs a dual-phase training recipe.</p>
+                        <div>
+                            <p>
+                                As illustrated in Fig. 2, StageVLA incorporates SAVG and DP3-MSF to facilitate atomic
+                                skill training.
+                                Subsequently, we present ablation studies to validate the efficacy of each component.
+                            </p>
 
-                        <h4 class="title is-5 mt-5 mb-3">2D Heatmap Pre-training</h4>
-                        <p>
-                            We train BridgeVLA on 2D object detection datasets. The model takes as input an image and
-                            language describing the target object and outputs a 2D heatmap which highlights regions of
-                            interest that correspond to the target object.
-                        </p>
-
-                        <h4 class="title is-5 mt-5 mb-3">3D Action Fine-tuning</h4>
-                        <p>
-                            The model takes as input three orthographic projection images of a 3D point cloud and a
-                            language instruction. It outputs three 2D heatmaps, which highlight the position of the
-                            end-effector in the next keyframe across all three views. For the remaining action
-                            components, it uses an MLP to aggregate the image feature tokens to predict the rotation
-                            action, gripper action, and collision flag of the next keyframe.
-                        </p>
-
-                        <div class="box" style="margin-top: 2rem; margin-bottom: 2rem;">
-                            <div class="content has-text-centered">
-                                <img src="./static/images/network.png" alt="grade-lv" width="100%"
-                                    style="max-width: 1200px; height: auto;" />
-                                <p>Figure 2: Network architecture of BridgeVLA</p>
+                            <h4 class="title is-5 mt-5 mb-3">SAVG</h4>
+                            <div class="box" style="margin-top: 2rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/linyi_SAVG_ModelStructure.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 2: Network architecture of SAVG</p>
+                                </div>
                             </div>
+
+                            <p>
+                                For Approaching, SAVG integrates a spatially-biased cross-attention mechanism between
+                                the condition and target point clouds.
+                                Furthermore, it employs a CAVE model, conditioned on symbolic labels extracted from
+                                PHSM,
+                                to predict the SAV across diverse scenarios.
+                            </p>
+                            <!-- DP3-MSF -->
+                            <h4 class="title is-5 mt-5 mb-3">DP3-MSF</h4>
+                            <div class="box" style="margin-top: 2rem; margin-bottom: 2rem;">
+                                <div class="content has-text-centered">
+                                    <img src="./static/images/linyi_DP3-MSF.png" alt="grade-lv" width="100%"
+                                        style="max-width: 1200px; height: auto;" />
+                                    <p>Figure 2: Network architecture of DP3-MSF</p>
+                                </div>
+                            </div>
+                            <p>
+                                For interaction, DP3-MSF employs a diffusion process conditioned on 3D scene features
+                                (without state MLP), trained with
+                                StageGen for contact-rich manipulation.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -460,13 +543,13 @@
                         <h2 class="title is-3 has-text-centered">Simulation Experiments</h2>
 
                         <p class="has-text-justified">
-                            To test our model's ability to deal with complex manipulation tasks, we evaluate BridgeVLA
-                            on RLBench, a benchmark implemented in CoppeliaSim using a Franka Panda robot mounted
-                            with a parallel-jaw gripper. Totally, we choose 18 tasks from RLBench, and each task is
-                            provided with 100 expert demonstrations.
-                            And each demonstration is paired with language instruction and multiple keyframes. Models
-                            are evaluated via binary success rates over 25 trials per task,
-                            with a maximum of 25 action steps per trial. The results are shown in Tab. 1.
+                            We evaluate StageVLA in CoppeliaSim and IsaacSim using a Franka Panda robot, leveraging
+                            calibrated RGB-D inputs projected into world-frame point clouds. Our benchmark comprises six
+                            challenging tasks varying in viewpoint, fidelity, stage count, manipulation type, and
+                            geometric complexity, with each task assessed over 100 trials based on 200 expert
+                            demonstrations. Compared to representative 2D (DP, ACT), 3D (DP3), and vision-language
+                            (SmolVLA) baselines, StageVLA achieves a superior average success rate of 96.17%,
+                            demonstrating robust generalization across all tested dimensions.
                         </p>
                         <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
                             <div class="content has-text-centered">
@@ -484,9 +567,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/Sim-CubeStacking.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/Sim-CubeStacking.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">Sim-CubeStacking</p>
@@ -495,8 +576,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/place_mug_on_blue_cube.mp4"
+                                        <source src="./static/videos/Experiments/place_mug_on_blue_cube.mp4"
                                             type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -506,8 +586,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/place_mug_into_microwave.mp4"
+                                        <source src="./static/videos/Experiments/place_mug_into_microwave.mp4"
                                             type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -522,9 +601,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/CloseLaptopLid.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/CloseLaptopLid.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">CloseLaptopLid</p>
@@ -533,9 +610,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/PutMoneySafe.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/PutMoneySafe.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">PutMoneySafe</p>
@@ -544,9 +619,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/PushButton.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/PushButton.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">PushButton</p>
@@ -554,21 +627,27 @@
                             </div>
                         </div>
 
-                       
-                    
 
 
-                       
+
+
+
 
                         <!-- Real-World Experiments -->
                         <h2 class="title is-3 has-text-centered">Real-World Experiments</h2>
 
                         <p class="has-text-justified">
-                            We conduct real-robot experiments to further verify our model's performance. A total of 13
+                            We conduct real-robot experiments to further verify our model's performance. A total of 6
                             manipulation tasks are evaluated, covering a spectrum from simple pick-and-place to
-                            long-horizon behaviors such as opening a drawer and placing objects inside.
+                            long-horizon behaviors such as opening a box and placing object inside.
                         </p>
-
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/RealPolicyEval.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: Results on RLBench.</p>
+                            </div>
+                        </div>
 
 
                         <!-- RLBench Videos -->
@@ -589,9 +668,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/CubeStacking.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/CubeStacking.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">CubeStacking</p>
@@ -600,9 +677,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/TrashSweep.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/TrashSweep.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">TrashSweep</p>
@@ -615,8 +690,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source src="./static/videos/Experiments/MugRack.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/MugRack.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">MugRack</p>
@@ -625,9 +699,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/TightenContainer.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/TightenContainer.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">TightenContainer</p>
@@ -636,9 +708,7 @@
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
-                                        <source
-                                            src="./static/videos/Experiments/PutStationeryBox.mp4"
-                                            type="video/mp4">
+                                        <source src="./static/videos/Experiments/PutStationeryBox.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                     <p class="has-text-centered">PutStationeryBox</p>
@@ -646,50 +716,148 @@
                             </div>
                         </div>
 
-                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
-                            <div class="content has-text-centered">
-                                <img src="./static/images/TaskDescription.png" alt="grade-lv" width="100%"
-                                    style="max-width: 1200px; height: auto;" />
-                                <p>Table 1: Results on RLBench.</p>
-                            </div>
-                        </div>
 
-                        <h4 class="title is-5 mt-5 mb-3">Results</h4>
+
+                        <h2 class="title is-3 has-text-centered">Results</h2>
                         <p class="has-text-justified">
-                            In addition to the full model, we compare against RVT-2, the strongest simulation baseline,
-                            and an ablated variant of BridgeVLA without our proposed 2D-heatmap pretraining.
-                            The results are shown in Fig. 4.
-                            BridgeVLA outperforms both baselines in six of the seven settings, and maintains high
-                            robustness under visual disturbances (Distractor, Background).
+                            We further evaluate generalization under
+                            seven conditions: in-distribution, gripper replacement, dark
+                            lighting, background variation, height variation ,
+                            random disturbances, and visual distractors.
+                            In addition to the full model, we compare against SmolVLA and DP3, the strongest baselines,
+                            The results are shown in Fig. 9.
+                            StageVLA outperforms both baselines in all settings, and maintains high
+                            robustness under diverse distractors.
                         </p>
-
-                        <p class="has-text-justified">
-                            Furthermore, it achieves a 96.8% success rate in the Basic setting even with only 3 training
-                            trajectories per task, showing remarkable data efficiency. The results also validate the
-                            effectiveness of our 2D-heatmap pretraining in connecting language and vision for
-                            compositional task generalization.
-                        </p>
-
 
                         <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
                             <div class="content has-text-centered">
-                                <img src="./static/images/RealWorldGenralizationSetting.png" alt="grade-lv" width="100%"
-                                    style="max-width: 1200px; height: auto;" />
                                 <img src="./static/images/RealGeneralizationResults.png" alt="grade-lv" width="100%"
                                     style="max-width: 1200px; height: auto;" />
-                                <p>Figure 4: Real-robot setup and results.</p>
+                                <p>Figure 9: Real-robot setup and results.</p>
                             </div>
                         </div>
-  
 
+                        <!-- RLBench Videos -->
+                        <h3 class="title is-4 has-text-centered">Evaluation Videos</h3>
+
+                        <!-- Row 1 -->
+                        <div class="columns is-multiline">
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/Evaluation-BoxStacking.mp4"
+                                            type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">BoxStacking</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/Evaluation-CubeStacking.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">CubeStacking</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/Evaluation-TrashSweep.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">TrashSweep</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="columns is-multiline">
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/Evaluation-MugRack.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">MugRack</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/Evaluation-TightenContainer.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">TightenContainer</p>
+                                </div>
+                            </div>
+                            <div class="column is-one-third">
+                                <div class="box">
+                                    <video width="100%" controls>
+                                        <source src="./static/videos/Experiments/Evaluation-PutStationeryBox.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p class="has-text-centered">PutStationeryBox</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        
 
                         <h2 class="title is-3 has-text-centered">Ablation Study</h2>
                         <p class="has-text-justified">
-                            In addition to the full model, we compare against RVT-2, the strongest simulation baseline,
-                            and an ablated variant of BridgeVLA without our proposed 2D-heatmap pretraining.
-                            The results are shown in Fig. 4.
-                            BridgeVLA outperforms both baselines in six of the seven settings, and maintains high
-                            robustness under visual disturbances (Distractor, Background).
+                            We conduct four ablation studies to validate the key design
+                            choices of StageVLA, including interaction modeling, loss
+                            formulation, point cloud backbone and fusion strategy, and
+                            the effectiveness of StageGen.
+                        </p>
+
+
+                        <!-- DP3-MSF -->
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/DP3-MSF-Ablation.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: Ablation study on DP3-MSF components.</p>
+                            </div>
+                        </div>
+                        <p>
+                            To evaluate the efficacy of each component in DP3-MSF, we conduct an incremental ablation
+                            study starting from the base DP3 model. We define four variants: (M) utilizing object-masked
+                            point clouds; (D) and (S) trained exclusively on full or interaction-only synthetic
+                            trajectories, respectively; and (F) removing the State MLP branch (State-Free). All other
+                            variants are trained on a limited set of 50 expert demonstrations. Experiments focus on the
+                            CubeStacking task, decomposed into Pick and Place atomic skills. We report the average
+                            success rate over 100 trials (50 per skill) , where both robot initial poses and object
+                            configurations are randomly perturbed to simulate phase-transition noise and prevent
+                            trajectory replay.
+                        </p>
+
+
+
+                        <!-- StageGen -->
+                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="content has-text-centered">
+                                <img src="./static/images/SAVG-Ablation.png" alt="grade-lv" width="100%"
+                                    style="max-width: 1200px; height: auto;" />
+                                <p>Table 1: Ablation study on point cloud backbones and fusion strategies.</p>
+                            </div>
+                        </div>
+                        <p>
+                            <strong>(a) Loss Function Analysis.</strong> We benchmark SAVG loss variants using pose MSE (XYZ + Rot6D) on
+                            an augmented test set. Candidates include: (1) Chamfer Distance on point clouds; (2) MSE
+                            + Geodesic Distance; (3) Pure Pose MSE; and (4) MSE + Relative Auxiliary Loss (Rel), which
+                            enforces consistency via iterative feedback of transformed predictions. To assess the
+                            learning of relative transformations, evaluation employs a three-step iterative refinement
+                            strategy.
+                            <strong>(b) Performance evaluation of different backbones.</strong>
+                            We evaluate three point cloud backbones (PointNet, Point-
+                            Net++, PointTransformerV3) and four fusion strategies (Con-
+                            cat, CA, ResFiLM, BiasCA).
                         </p>
 
                         <!-- StageGen -->
@@ -697,60 +865,28 @@
                             <div class="content has-text-centered">
                                 <img src="./static/images/StageGen-Ablation.png" alt="grade-lv" width="100%"
                                     style="max-width: 1200px; height: auto;" />
-                                <p>Table 1: StageGen Ablation Based on SAVG & DP3-MSGF</p>
+                                <p>Table 1: Impact of StageGen on data efficiency.</p>
                             </div>
                         </div>
+                        <p>
+                            To evaluate data efficiency, we conduct experiments on
+                            CubeStacking with varying numbers of real demonstrations,
+                            comparing models trained with and without StageGen. For
+                            each real demonstration, StageGen generates 500 synthetic
+                            episodes. We then evaluate SAVG and DP-MF in terms of
+                            pose MSE over 20 held-out trials.
+                        </p>
 
 
-
-
-
-                        
-                        <!-- SAVG -->
-                        <!-- 1. 添加 columns 容器 -->
-                        <div class="columns is-centered" style="margin-top: 1rem;">
-                            
-                            <!-- 2. 第一个图放在 column 中 (is-half 表示占一半宽度) -->
-                            <div class="column is-half">
-                                <div class="box">
-                                    <div class="content has-text-centered">
-                                        <img src="./static/images/SAVG-LossFunctionAblation.png" alt="Loss Function Ablation" width="100%" style="height: auto;" />
-                                        <p><strong>Figure 1:</strong> SAVG Loss Function Ablation.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- DP3-MSGF -->
-                            <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
-                                <div class="content has-text-centered">
-                                    <img src="./static/images/DP3-MSGF-Ablation.png" alt="grade-lv" width="90%"
-                                        style="max-width: 1200px; height: auto;" />
-                                    <p>Table 1: StageGen Ablation Based on SAVG & DP3-MF</p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                                                <!-- StageGen -->
-                        <div class="box" style="margin-top: 1rem; margin-bottom: 1rem;">
-                            <div class="content has-text-centered">
-                                <img src="./static/images/SAVG-FusionModelAblation.png" alt="grade-lv" width="100%"
-                                    style="max-width: 1200px; height: auto;" />
-                                <p>Table 1: SAVG Fusion Model Ablation</p>
-                            </div>
-                        </div>
-
-
-
-
-                       
 
                         <h2 class="title is-3 has-text-centered">Failure Cases</h2>
                         <p class="has-text-justified">
                             Although our method outperforms baseline methods in the Category setting, its absolute
                             success rate is not high.
-                            We show some failure cases below.
-
-                        <div class="columns is-multiline">
+                            The largest degradation of StageVLA occurs under ex-
+                            treme lighting, due to LiDAR sensing and segmentation
+                            sensitivity
+                        <!-- <div class="columns is-multiline">
                             <div class="column is-one-third">
                                 <div class="box">
                                     <video width="100%" controls>
@@ -784,22 +920,11 @@
                                     <p class="has-text-centered">Put peach on bottom shelf</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
 
-                        We believe this relatively low performance is not due to BridgeVLA forgetting the knowledge
-                        gained from pre-training,
-                        as it still predicts heatmaps accurately when provided with samples from the pre-training
-                        dataset after fine-tuning (see Fig.5).
-                        Instead, we hypothesize that the reduced performance stems from two factors:
-                        1) The images in the pre-training dataset are captured from third-person views, which differ
-                        significantly from the projection images in our robot data;
-                        2) The pre-training task focuses solely on object localization, whereas manipulation involves
-                        predicting keypoints that do not correspond to an object.
-                        Exploring how to fully utilise such preserved pre-training knowledge for manipulation is an
-                        interesting direction for future research.
-                        </p>
+
 
 
                     </div>
@@ -811,7 +936,7 @@
 
 
 
-    </section>
+    <!-- </section>
     <section class="hero is-light is-small">
         <div class="hero-body has-text-centered">
             <h1 class="title is-1 mathvista_other" id="citation">Citation</h1>
@@ -825,13 +950,15 @@
                     <div class="content">
                         <pre><code>
 @misc{li2025bridgevla,
-    title={BridgeVLA: Input-Output Alignment for Efficient 3D Manipulation Learning with Vision-Language Models},
+    title={StageVLA: Input-Output Alignment for Efficient 3D Manipulation Learning with Vision-Language Models},
     author={Peiyan Li and Yixiang Chen and Hongtao Wu and Xiao Ma and Xiangnan Wu and Yan Huang and Liang Wang and Tao Kong and Tieniu Tan},
     year={2025},
     eprint={2506.07961},
     archivePrefix={arXiv},
     primaryClass={cs.RO}
-}
+} -->
+
+
 </code></pre>
                     </div>
                 </div>
